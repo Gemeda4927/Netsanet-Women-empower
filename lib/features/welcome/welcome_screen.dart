@@ -14,32 +14,39 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    const Color primaryPurple = Color(0xFF7B2CBF);
+    const primaryPurple = Color(0xFF7B2CBF);
     final screenWidth = MediaQuery.of(context).size.width;
-    final textScale = MediaQuery.of(context).textScaleFactor.clamp(0.9, 1.2);
+    final textScale = MediaQuery.of(
+      context,
+    ).textScaleFactor.clamp(0.85, 1.15); // slightly smaller
 
-    final welcomeTitle = isAmharic ? 'እንኳን ወደ ቴና በደህና መጡ' : 'Welcome to Tena';
-    final welcomeSubtitle = isAmharic
-        ? 'በየቀኑ ህይወትዎን የተሻለ ለማድረግ አማካሪ አገልግሎቶችን ከአካባቢዎ ጋር ያገናኙ።'
-        : 'Connecting you with trusted local services for a better everyday life.';
-
-    final findHelpText = isAmharic ? 'አሁን እርዳታ ይፈልጉ' : 'Find Help Now';
-    final becomeProviderText = isAmharic ? 'አቅራቢ ይሁኑ' : 'Become a Provider';
-
-    final feature1Title = isAmharic ? 'የተረጋገጡ አቅራቢዎች' : 'Verified Providers';
-    final feature1Desc = isAmharic
-        ? 'የእርስዎ ደህንነት ቅድሚያ የሚሰጠው።'
-        : 'Safety first for your peace of mind.';
-
-    final feature2Title = isAmharic ? 'ሴቶችን ማብረት' : 'Empowering Women';
-    final feature2Desc = isAmharic
-        ? 'በኢትዮጵያ ውስጥ የአካባቢ እድገትን መደገፍ።'
-        : 'Supporting local growth in Ethiopia.';
-
-    final feature3Title = isAmharic ? 'ማህበረሰብ' : 'Community';
-    final feature3Desc = isAmharic
-        ? 'ጠንካራ አውታረ መረብ መገንባት።'
-        : 'Building a stronger network.';
+    final texts = isAmharic
+        ? {
+            'welcomeTitle': 'እንኳን ወደ ቴና በደህና መጡ',
+            'welcomeSubtitle':
+                'በየቀኑ ህይወትዎን የተሻለ ለማድረግ አማካሪ አገልግሎቶችን ከአካባቢዎ ጋር ያገናኙ።',
+            'findHelp': 'አሁን እርዳታ ይፈልጉ',
+            'becomeProvider': 'አቅራቢ ይሁኑ',
+            'feature1Title': 'የተረጋገጡ አቅራቢዎች',
+            'feature1Desc': 'የእርስዎ ደህንነት ቅድሚያ የሚሰጠው።',
+            'feature2Title': 'ሴቶችን ማብረት',
+            'feature2Desc': 'በኢትዮጵያ ውስጥ የአካባቢ እድገትን መደገፍ።',
+            'feature3Title': 'ማህበረሰብ',
+            'feature3Desc': 'ጠንካራ አውታረ መረብ መገንባት።',
+          }
+        : {
+            'welcomeTitle': 'Welcome to Tena',
+            'welcomeSubtitle':
+                'Connecting you with trusted local services for a better everyday life.',
+            'findHelp': 'Find Help Now',
+            'becomeProvider': 'Become a Provider',
+            'feature1Title': 'Verified Providers',
+            'feature1Desc': 'Safety first for your peace of mind.',
+            'feature2Title': 'Empowering Women',
+            'feature2Desc': 'Supporting local growth in Ethiopia.',
+            'feature3Title': 'Community',
+            'feature3Desc': 'Building a stronger network.',
+          };
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8F9FA),
@@ -48,29 +55,29 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           physics: const BouncingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: screenWidth > 600 ? 48 : 24,
-              vertical: 20,
+              horizontal: screenWidth > 600 ? 40 : 20, // reduced padding
+              vertical: 16,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // Header with Logo & Language Toggle
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Row(
                       children: [
                         Container(
-                          width: 42,
-                          height: 42,
+                          width: 38, // smaller
+                          height: 38,
                           decoration: BoxDecoration(
                             color: primaryPurple,
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(8),
                             boxShadow: [
                               BoxShadow(
                                 color: primaryPurple.withOpacity(0.3),
-                                blurRadius: 8,
-                                offset: const Offset(0, 4),
+                                blurRadius: 6,
+                                offset: const Offset(0, 3),
                               ),
                             ],
                           ),
@@ -79,17 +86,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               'T',
                               style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 28,
+                                fontSize: 24, // smaller
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12),
+                        const SizedBox(width: 10),
                         Text(
                           'Tena',
                           style: TextStyle(
-                            fontSize: 28 * textScale,
+                            fontSize: 24 * textScale, // smaller
                             fontWeight: FontWeight.bold,
                             color: primaryPurple,
                           ),
@@ -100,8 +107,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       onTap: () => setState(() => isAmharic = !isAmharic),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 10,
+                          horizontal: 14,
+                          vertical: 8,
                         ),
                         decoration: BoxDecoration(
                           gradient: const LinearGradient(
@@ -110,15 +117,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               Color(0xFFB15EFF),
                               Color(0xFF7B2CBF),
                             ],
-                            begin: Alignment.centerLeft,
-                            end: Alignment.centerRight,
                           ),
-                          borderRadius: BorderRadius.circular(30),
+                          borderRadius: BorderRadius.circular(28),
                           boxShadow: [
                             BoxShadow(
                               color: primaryPurple.withOpacity(0.3),
-                              blurRadius: 8,
-                              offset: const Offset(0, 4),
+                              blurRadius: 6,
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
@@ -128,7 +133,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             Text(
                               isAmharic ? 'አማ' : 'Eng',
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
                               ),
@@ -136,16 +141,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             Text(
                               isAmharic ? ' / Eng' : ' / አማ',
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white70,
                               ),
                             ),
-                            const SizedBox(width: 6),
+                            const SizedBox(width: 4),
                             const Icon(
                               Icons.keyboard_arrow_down,
                               color: Colors.white,
-                              size: 20,
+                              size: 18,
                             ),
                           ],
                         ),
@@ -153,15 +158,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 32),
+                // Image
                 AnimatedOpacity(
-                  opacity: 1.0,
+                  opacity: 1,
                   duration: const Duration(milliseconds: 1200),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(16),
                     child: Container(
                       width: double.infinity,
-                      height: screenWidth > 500 ? 360 : 280,
+                      height: screenWidth > 500 ? 320 : 240, // smaller image
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage('assets/images/logo.png'),
@@ -171,59 +177,62 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40),
+                const SizedBox(height: 32),
+                // Title & Subtitle
                 Text(
-                  welcomeTitle,
+                  texts['welcomeTitle']!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 34 * textScale,
+                    fontSize: 28 * textScale, // smaller
                     fontWeight: FontWeight.w800,
                     color: Colors.black87,
                     height: 1.15,
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 Text(
-                  welcomeSubtitle,
+                  texts['welcomeSubtitle']!,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 16.5 * textScale,
+                    fontSize: 14.5 * textScale, // smaller
                     color: Colors.grey[700],
-                    height: 1.55,
+                    height: 1.5,
                   ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 36),
+                // Features
                 _FeatureCard(
                   icon: Icons.verified_user_outlined,
-                  title: feature1Title,
-                  description: feature1Desc,
+                  title: texts['feature1Title']!,
+                  description: texts['feature1Desc']!,
                   iconColor: primaryPurple,
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 _FeatureCard(
                   icon: Icons.trending_up,
-                  title: feature2Title,
-                  description: feature2Desc,
+                  title: texts['feature2Title']!,
+                  description: texts['feature2Desc']!,
                   iconColor: Colors.teal,
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 _FeatureCard(
                   icon: Icons.groups,
-                  title: feature3Title,
-                  description: feature3Desc,
+                  title: texts['feature3Title']!,
+                  description: texts['feature3Desc']!,
                   iconColor: Colors.orangeAccent,
                 ),
-                const SizedBox(height: 60),
+                const SizedBox(height: 48),
+                // Buttons
                 SizedBox(
                   width: double.infinity,
-                  height: 58,
+                  height: 50, // smaller
                   child: ElevatedButton(
                     onPressed: () => context.go(RouteName.login),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryPurple,
                       foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(28),
                       ),
                       elevation: 2,
                       shadowColor: primaryPurple.withOpacity(0.4),
@@ -232,46 +241,46 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          findHelpText,
+                          texts['findHelp']!,
                           style: TextStyle(
-                            fontSize: 17 * textScale,
+                            fontSize: 15 * textScale,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(width: 10),
-                        const Icon(Icons.search, size: 22),
+                        const SizedBox(width: 8),
+                        const Icon(Icons.search, size: 20),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 12),
                 SizedBox(
                   width: double.infinity,
-                  height: 58,
+                  height: 50, // smaller
                   child: OutlinedButton(
                     onPressed: () => context.go(RouteName.createAccount),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: primaryPurple,
-                      side: const BorderSide(color: primaryPurple, width: 2.2),
+                      side: const BorderSide(color: primaryPurple, width: 2),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(28),
                       ),
                     ),
                     child: Text(
-                      becomeProviderText,
+                      texts['becomeProvider']!,
                       style: TextStyle(
-                        fontSize: 17 * textScale,
+                        fontSize: 15 * textScale,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 36),
                 Text(
                   '© 2026 Tena • v1.0.0',
-                  style: TextStyle(color: Colors.grey[500], fontSize: 13),
+                  style: TextStyle(color: Colors.grey[500], fontSize: 12),
                 ),
-                const SizedBox(height: 24),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -297,24 +306,24 @@ class _FeatureCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: const Color(0xFFF5EFFF),
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(14),
         border: Border.all(color: const Color(0xFFE0D4FF), width: 1),
       ),
       child: Row(
         children: [
           Container(
-            width: 56,
-            height: 56,
+            width: 50,
+            height: 50,
             decoration: BoxDecoration(
               color: iconColor.withOpacity(0.15),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: Icon(icon, color: iconColor, size: 28),
+            child: Icon(icon, color: iconColor, size: 26),
           ),
-          const SizedBox(width: 20),
+          const SizedBox(width: 16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -322,15 +331,15 @@ class _FeatureCard extends StatelessWidget {
                 Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 17,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.black87,
                   ),
                 ),
-                const SizedBox(height: 6),
+                const SizedBox(height: 4),
                 Text(
                   description,
-                  style: TextStyle(fontSize: 15, color: Colors.grey[700]),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[700]),
                 ),
               ],
             ),
