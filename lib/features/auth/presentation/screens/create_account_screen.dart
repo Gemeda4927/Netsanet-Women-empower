@@ -13,6 +13,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   bool _agreed = false;
   String? _selectedService;
 
+  static const Color primaryPurple = Color(0xFF6A11CB);
+
   final List<String> _services = [
     'Plumber',
     'Electrician',
@@ -23,8 +25,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     'Tutor',
     'Other',
   ];
-
-  static const Color primaryPurple = Color(0xFF6A11CB);
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +42,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
           'Create Account',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 16,
             fontWeight: FontWeight.w600,
+            fontSize: 16,
           ),
         ),
       ),
@@ -55,9 +55,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-                /// Progress Indicator
                 const SizedBox(height: 8),
+
+                /// Progress
                 Center(
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -69,9 +69,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 28),
+                const SizedBox(height: 30),
 
-                /// Headings
+                /// Title
                 const Text(
                   'Join as a',
                   style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
@@ -86,7 +86,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   style: TextStyle(fontSize: 14.5, color: Colors.black54),
                 ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 32),
 
                 /// Full Name
                 _label('Full Name'),
@@ -97,13 +97,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
                 const SizedBox(height: 20),
 
-                /// Phone Number
+                /// Phone
                 _label('Phone Number'),
-                _inputField(
-                  hint: '911 234 567',
-                  prefix: '+251 ',
-                  icon: Icons.phone_android,
-                  keyboard: TextInputType.phone,
+                Row(
+                  children: [
+                    _prefixBox('+251'),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _inputField(
+                        hint: '911 234 567',
+                        icon: Icons.phone_android,
+                        keyboard: TextInputType.phone,
+                      ),
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 6),
                 const Text(
@@ -122,19 +129,20 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
                       isExpanded: true,
-                      hint: const Text('Select your service'),
                       value: _selectedService,
+                      hint: const Text(
+                        'Select your service',
+                        style: TextStyle(color: Colors.black54),
+                      ),
+                      icon: const Icon(Icons.keyboard_arrow_down),
                       items: _services
                           .map(
-                            (e) => DropdownMenuItem(
-                              value: e,
-                              child: Text(e),
-                            ),
+                            (e) => DropdownMenuItem(value: e, child: Text(e)),
                           )
                           .toList(),
-                      onChanged: (value) =>
-                          setState(() => _selectedService = value),
-                      icon: const Icon(Icons.keyboard_arrow_down),
+                      onChanged: (value) {
+                        setState(() => _selectedService = value);
+                      },
                     ),
                   ),
                 ),
@@ -162,8 +170,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         'Use current location',
                         style: TextStyle(
                           color: primaryPurple,
-                          fontWeight: FontWeight.w600,
                           fontSize: 14,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],
@@ -186,7 +194,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                         padding: const EdgeInsets.only(top: 4),
                         child: RichText(
                           text: const TextSpan(
-                            style: TextStyle(fontSize: 13.5, color: Colors.black54),
+                            style: TextStyle(
+                              fontSize: 13.5,
+                              color: Colors.black54,
+                            ),
                             children: [
                               TextSpan(text: 'I agree to the '),
                               TextSpan(
@@ -212,9 +223,9 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                   ],
                 ),
 
-                const SizedBox(height: 24),
+                const SizedBox(height: 28),
 
-                /// Register Button
+                /// Button
                 SizedBox(
                   width: double.infinity,
                   height: 54,
@@ -222,15 +233,17 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                     onPressed: _agreed ? () {} : null,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: primaryPurple,
-                      disabledBackgroundColor: Colors.grey[300],
+                      disabledBackgroundColor: Colors.grey.shade300,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
                       ),
-                      elevation: 2,
                     ),
                     child: const Text(
                       'Register Now',
-                      style: TextStyle(fontSize: 16.5, fontWeight: FontWeight.w600),
+                      style: TextStyle(
+                        fontSize: 16.5,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                 ),
@@ -241,7 +254,10 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 Center(
                   child: RichText(
                     text: TextSpan(
-                      style: const TextStyle(color: Colors.black54, fontSize: 14),
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.black54,
+                      ),
                       children: [
                         const TextSpan(text: 'Already have an account? '),
                         WidgetSpan(
@@ -270,14 +286,14 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     );
   }
 
-  /// Helpers
+  /// Widgets
 
   static Widget _progressDot(bool active) {
     return Container(
       width: 22,
       height: 4,
       decoration: BoxDecoration(
-        color: active ? primaryPurple : Colors.grey[300],
+        color: active ? primaryPurple : Colors.grey.shade300,
         borderRadius: BorderRadius.circular(2),
       ),
     );
@@ -294,7 +310,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     required String hint,
     required IconData icon,
     Color iconColor = Colors.grey,
-    String? prefix,
     TextInputType keyboard = TextInputType.text,
   }) {
     return Container(
@@ -304,13 +319,24 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         keyboardType: keyboard,
         decoration: InputDecoration(
           hintText: hint,
-          prefixText: prefix,
           suffixIcon: Icon(icon, color: iconColor),
           border: InputBorder.none,
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 16,
+            vertical: 14,
+          ),
         ),
       ),
+    );
+  }
+
+  static Widget _prefixBox(String text) {
+    return Container(
+      height: 52,
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      alignment: Alignment.center,
+      decoration: _boxDecoration(),
+      child: Text(text, style: const TextStyle(fontWeight: FontWeight.w600)),
     );
   }
 
